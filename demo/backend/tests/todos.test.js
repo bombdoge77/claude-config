@@ -35,6 +35,7 @@ describe('POST /api/todos', () => {
   it('returns 400 when title is blank', async () => {
     const res = await request(app).post('/api/todos').send({ title: '   ' });
     expect(res.status).toBe(400);
+    expect(res.body.error).toBe('title is required');
   });
 });
 
