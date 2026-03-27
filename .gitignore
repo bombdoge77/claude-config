@@ -1,0 +1,24 @@
+# Plugin caches (contain embedded git repos)
+.claude/plugins/cache/
+.claude/plugins/marketplaces/
+
+# Claude volatile/sensitive data
+.claude/cache/
+.claude/history.jsonl
+.claude/sessions/
+.claude/shell-snapshots/
+.claude/statsig/
+.claude/debug/
+.claude/downloads/
+.claude/file-history/
+.claude/mcp-needs-auth-cache.json
+.claude/session-env/
+.claude/backups/
+.claude/projects/
+.claude/tasks/
+.claude/plans/
+.claude/todos/
+.claude/plugins/install-counts-cache.json
+
+# Worktrees
+.worktrees/

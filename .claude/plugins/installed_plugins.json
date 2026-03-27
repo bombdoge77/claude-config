@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "plugins": {
+    "Notion@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/oliverkiss/.claude/plugins/cache/claude-plugins-official/Notion/0.1.0",
+        "version": "0.1.0",
+        "installedAt": "2026-03-04T22:04:26.232Z",
+        "lastUpdated": "2026-03-04T22:04:26.232Z",
+        "gitCommitSha": "9847f2aa1a15f25df35ed1fb7b4557dbb60cd651"
+      }
+    ],
+    "code-review@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/oliverkiss/.claude/plugins/cache/claude-plugins-official/code-review/72b975468071",
+        "version": "72b975468071",
+        "installedAt": "2026-03-04T22:08:56.434Z",
+        "lastUpdated": "2026-03-27T07:03:36.782Z",
+        "gitCommitSha": "205b6e0b30366a969412d9aab7b99bea99d58db1"
+      }
+    ],
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/oliverkiss/.claude/plugins/cache/claude-plugins-official/frontend-design/72b975468071",
+        "version": "72b975468071",
+        "installedAt": "2026-03-04T22:09:10.708Z",
+        "lastUpdated": "2026-03-27T07:03:36.782Z",
+        "gitCommitSha": "205b6e0b30366a969412d9aab7b99bea99d58db1"
+      }
+    ],
+    "superpowers@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/oliverkiss/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.6",
+        "version": "5.0.6",
+        "installedAt": "2026-03-04T22:09:11.518Z",
+        "lastUpdated": "2026-03-27T07:03:37.362Z",
+        "gitCommitSha": "e4a2375cb705ca5800f0833528ce36a3faf9017a"
+      }
+    ],
+    "slack@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/oliverkiss/.claude/plugins/cache/claude-plugins-official/slack/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-03-04T22:31:12.419Z",
+        "lastUpdated": "2026-03-04T22:31:12.419Z",
+        "gitCommitSha": "08dd8db7f4207b1cfe9ccb38fc64fe971d1f9e15"
+      }
+    ]
+  }
+}
