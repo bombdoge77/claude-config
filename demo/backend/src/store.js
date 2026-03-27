@@ -1,7 +1,7 @@
 let todos = [];
 let nextId = 1;
 
-const getAll = () => todos;
+const getAll = () => [...todos];
 
 const create = (title) => {
   const todo = { id: String(nextId++), title, completed: false, createdAt: new Date().toISOString() };
@@ -13,7 +13,7 @@ const toggle = (id) => {
   const todo = todos.find(t => t.id === id);
   if (!todo) return null;
   todo.completed = !todo.completed;
-  return todo;
+  return { ...todo };
 };
 
 const remove = (id) => {
