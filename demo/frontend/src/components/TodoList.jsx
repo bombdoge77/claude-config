@@ -10,7 +10,7 @@ export default function TodoList() {
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error loading todos. Is the backend running?</p>;
-  if (!todos.length) return <p>No todos yet. Add one above!</p>;
+  if (!todos?.length) return <p>No todos yet. Add one above!</p>;
 
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
