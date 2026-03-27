@@ -124,6 +124,10 @@ html, body {
 
 .todo-list {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .todo-state {
@@ -151,8 +155,9 @@ html, body {
   display: flex;
   align-items: center;
   gap: 0.9rem;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
   animation: slideIn 0.18s ease;
 }
 
