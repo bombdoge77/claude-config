@@ -16,16 +16,24 @@ export default function TodoItem({ todo }) {
   });
 
   return (
-    <li style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+    <li className="todo-item">
       <input
+        className="todo-checkbox"
         type="checkbox"
         checked={todo.completed}
         onChange={() => toggle()}
+        aria-label={`Mark "${todo.title}" as ${todo.completed ? 'incomplete' : 'complete'}`}
       />
-      <span style={{ flex: 1, textDecoration: todo.completed ? 'line-through' : 'none' }}>
+      <span className={`todo-title${todo.completed ? ' todo-title--done' : ''}`}>
         {todo.title}
       </span>
-      <button onClick={() => remove()}>Delete</button>
+      <button
+        className="todo-delete"
+        onClick={() => remove()}
+        aria-label={`Delete "${todo.title}"`}
+      >
+        ×
+      </button>
     </li>
   );
 }

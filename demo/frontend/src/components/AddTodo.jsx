@@ -20,15 +20,15 @@ export default function AddTodo() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+    <form onSubmit={handleSubmit} className="add-form">
       <input
+        className="add-input"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Add a todo..."
-        style={{ flex: 1, padding: 8 }}
+        placeholder="new task..."
       />
-      <button type="submit" disabled={isPending}>
-        {isPending ? 'Adding...' : 'Add'}
+      <button type="submit" className="add-button" disabled={isPending} aria-label="Add task">
+        {isPending ? '…' : '→'}
       </button>
     </form>
   );

@@ -3,8 +3,11 @@ import TodoList from './components/TodoList';
 
 export default function App() {
   return (
-    <div style={{ maxWidth: 600, margin: '2rem auto', fontFamily: 'sans-serif' }}>
-      <h1>Todos</h1>
+    <div className="app">
+      <header className="app-header">
+        <h1 className="app-title">tasks<span>.</span></h1>
+        <hr className="app-rule" />
+      </header>
       <AddTodo />
       <TodoList />
     </div>
