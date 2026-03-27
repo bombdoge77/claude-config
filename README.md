@@ -282,14 +282,13 @@ Slack workflow tools. Lets Claude post messages, read channel history, and inter
 ## Running the demo
 
 ```bash
-# Backend (localhost:3001)
-cd demo/backend && npm install && npm start
-
-# Frontend (localhost:5173)
-cd demo/frontend && npm install && npm run dev
+cd demo
+npm install          # installs concurrently
+npm run install:all  # installs backend + frontend deps
+npm start            # starts both, colour-coded output
 ```
 
-Open http://localhost:5173. The Vite dev server proxies `/api` to the backend — no CORS config needed.
+Open http://localhost:5173. The Vite dev server proxies `/api` to the backend — no CORS config needed. Ctrl+C stops both.
 
 ## Running backend tests
 
