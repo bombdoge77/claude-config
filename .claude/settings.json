@@ -164,6 +164,45 @@
       "Bash(df -h)",
       "Bash(cd * && git *)",
       "Bash(*)"
+    ],
+    "ask": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(git checkout -- *)",
+      "Bash(git checkout .)",
+      "Bash(git clean -f*)",
+      "Bash(git rebase*)",
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(rmdir *)",
+      "Bash(git branch -D *)",
+      "Bash(git tag -d *)",
+      "Bash(gh repo delete*)",
+      "Bash(npm publish*)",
+      "Bash(git push)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "A new session has started. Read demo/docs/index.md now to orient yourself with the project documentation before doing any work on the demo."
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "The session is ending. If you added, changed, or renamed any files in demo/docs/ during this session, update demo/docs/index.md to reflect those changes and commit the update."
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
