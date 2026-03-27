@@ -3,7 +3,6 @@ import { toggleTodo, deleteTodo } from '../api/todos';
 
 const CARD_COLORS = [
   { bg: '#1f1a0e', border: '#302610' }, // amber
-  { bg: '#1a0f12', border: '#2a1519' }, // rose
   { bg: '#0f1a11', border: '#152817' }, // sage
   { bg: '#0e1219', border: '#142030' }, // slate
   { bg: '#1e1309', border: '#2e1e0d' }, // terra
