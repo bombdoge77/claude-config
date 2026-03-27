@@ -34,3 +34,12 @@ cd .worktrees/feat/create-x-screen
 git worktree remove .worktrees/feat/create-x-screen
 git branch -d feat/create-x-screen
 ```
+
+## Demo Docs
+
+The `demo/docs/` directory contains project documentation.
+`demo/docs/index.md` is a table of contents — read it at the start of every session
+to orient yourself before touching demo code.
+
+At the end of a session where you added or changed docs, update `index.md` to
+reflect any new or renamed files.
