@@ -22,3 +22,4 @@
 
 # Worktrees
 .worktrees/
+node_modules/
