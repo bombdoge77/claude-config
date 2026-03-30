@@ -1,0 +1,70 @@
+<svg width="900" height="520" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="520" fill="#0d0d0b" rx="12"/>
+
+  <!-- ── Left: narrowed list ─────────────────────────────── -->
+  <g transform="translate(40, 40)">
+
+    <text x="0" y="56" font-family="Georgia, serif" font-style="italic" font-weight="300" font-size="46" fill="#e2dcc8">tasks</text>
+    <text x="108" y="56" font-family="Georgia, serif" font-style="italic" font-weight="300" font-size="46" fill="#c9a24a">.</text>
+    <line x1="0" y1="72" x2="340" y2="72" stroke="#252521" stroke-width="1"/>
+
+    <!-- Card 1 — amber, SELECTED (gold border + right-edge tab) -->
+    <rect x="0" y="86" width="340" height="48" rx="8" fill="#1f1a0e" stroke="#c9a24a" stroke-width="1.5"/>
+    <circle cx="18" cy="110" r="7" fill="none" stroke="#58564f" stroke-width="1.5"/>
+    <text x="36" y="115" font-family="sans-serif" font-size="12" fill="#e2dcc8">Schedule dentist appt.</text>
+    <rect x="334" y="86" width="6" height="48" rx="3" fill="#c9a24a"/>
+
+    <!-- Card 2 — sage -->
+    <rect x="0" y="144" width="340" height="48" rx="8" fill="#0f1a11" stroke="#152817" stroke-width="1"/>
+    <circle cx="18" cy="168" r="7" fill="none" stroke="#58564f" stroke-width="1.5"/>
+    <text x="36" y="173" font-family="sans-serif" font-size="12" fill="#e2dcc8">Review pull request</text>
+
+    <!-- Card 3 — slate, completed -->
+    <rect x="0" y="202" width="340" height="48" rx="8" fill="#0e1219" stroke="#142030" stroke-width="1"/>
+    <circle cx="18" cy="226" r="7" fill="#c9a24a" stroke="#c9a24a" stroke-width="1.5"/>
+    <polyline points="13,226 17,230 24,221" fill="none" stroke="#0d0d0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="36" y="231" font-family="sans-serif" font-size="12" fill="#3a3933" text-decoration="line-through">Buy groceries</text>
+
+    <!-- Card 4 — mauve -->
+    <rect x="0" y="260" width="340" height="48" rx="8" fill="#160f1d" stroke="#23182d" stroke-width="1"/>
+    <circle cx="18" cy="284" r="7" fill="none" stroke="#58564f" stroke-width="1.5"/>
+    <text x="36" y="289" font-family="sans-serif" font-size="12" fill="#e2dcc8">Read the docs</text>
+
+  </g>
+
+  <!-- ── Divider ──────────────────────────────────────────── -->
+  <line x1="420" y1="20" x2="420" y2="500" stroke="#252521" stroke-width="1"/>
+
+  <!-- ── Right: Detail panel ─────────────────────────────── -->
+  <g transform="translate(448, 40)">
+
+    <!-- Panel header -->
+    <text x="0" y="26" font-family="sans-serif" font-size="9" letter-spacing="2.5" fill="#58564f">TASK DETAIL</text>
+    <text x="404" y="26" font-family="sans-serif" font-size="18" fill="#58564f" text-anchor="end">×</text>
+    <line x1="0" y1="40" x2="414" y2="40" stroke="#252521" stroke-width="1"/>
+
+    <!-- Checkbox + title -->
+    <circle cx="16" cy="78" r="9" fill="none" stroke="#58564f" stroke-width="1.5"/>
+    <text x="38" y="85" font-family="Georgia, serif" font-style="italic" font-size="20" fill="#e2dcc8">Schedule dentist appointment</text>
+
+    <!-- Meta -->
+    <text x="38" y="108" font-family="sans-serif" font-size="11" fill="#58564f">Created Mar 30, 2026</text>
+    <line x1="0" y1="126" x2="414" y2="126" stroke="#252521" stroke-width="1"/>
+
+    <!-- Notes label -->
+    <text x="0" y="152" font-family="sans-serif" font-size="9" letter-spacing="2.5" fill="#58564f">NOTES</text>
+
+    <!-- Textarea box -->
+    <rect x="0" y="164" width="414" height="170" rx="8" fill="#161613" stroke="#252521" stroke-width="1"/>
+    <!-- Placeholder text inside -->
+    <text x="16" y="192" font-family="sans-serif" font-size="13" fill="#3a3933">Call to confirm availability before booking.</text>
+    <text x="16" y="214" font-family="sans-serif" font-size="13" fill="#3a3933">Ask about the new location on Elm St.</text>
+    <!-- cursor blink indicator -->
+    <rect x="16" y="224" width="1.5" height="14" fill="#c9a24a" opacity="0.7"/>
+
+    <!-- Save button -->
+    <rect x="326" y="352" width="88" height="34" rx="6" fill="#1f1a0e" stroke="#c9a24a" stroke-width="1"/>
+    <text x="370" y="374" font-family="sans-serif" font-size="12" fill="#c9a24a" text-anchor="middle">Save</text>
+
+  </g>
+</svg>
