@@ -43,3 +43,7 @@ to orient yourself before touching demo code.
 
 At the end of a session where you added or changed docs, update `index.md` to
 reflect any new or renamed files.
+
+## Manual Validation After Implementation
+
+Once implementation on a ticket is finished, if the change can be verified by manual testing (e.g. UI changes, user-facing behavior), boot up the local dev environment so the user can validate it themselves. Share the URL or launch command and say what to check before considering the ticket done.
