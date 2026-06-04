@@ -8,7 +8,7 @@ const CARD_COLORS = [
   { bg: '#160f1d', border: '#23182d' }, // mauve
 ];
 
-export default function TodoItem({ todo }) {
+export default function TodoItem({ todo, selected = false, onToggleSelect }) {
   const queryClient = useQueryClient();
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['todos'] });
 
@@ -26,6 +26,15 @@ export default function TodoItem({ todo }) {
 
   return (
     <li className="todo-item" style={{ background: bg, borderColor: border }}>
+      {onToggleSelect && (
+        <input
+          className="todo-select-checkbox"
+          type="checkbox"
+          checked={selected}
+          onChange={() => onToggleSelect(todo.id)}
+          aria-label={`Select "${todo.title}"`}
+        />
+      )}
       <input
         className="todo-checkbox"
         type="checkbox"

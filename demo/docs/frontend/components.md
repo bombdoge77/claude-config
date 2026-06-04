@@ -10,6 +10,7 @@ Fetch wrappers for all backend endpoints. All functions use a `checkOk` helper t
 | `createTodo(title)` | POST | `/api/todos` |
 | `toggleTodo(id)` | PATCH | `/api/todos/:id` |
 | `deleteTodo(id)` | DELETE | `/api/todos/:id` |
+| `bulkComplete(ids)` | POST | `/api/todos/bulk-complete` |
 
 ---
 
@@ -31,14 +32,21 @@ Fetch wrappers for all backend endpoints. All functions use a `checkOk` helper t
 
 **File:** `src/components/TodoList.jsx`
 
-**Responsibility:** Fetch and render the full list of todos.
+**Responsibility:** Fetch and render the full list of todos, with optional multi-select and bulk-complete.
+
+**State:**
+- `selectionMode` (boolean) — whether selection checkboxes are shown
+- `selectedIds` (Set) — IDs of currently selected (not-yet-completed) todos
 
 **Behaviour:**
 - `useQuery({ queryKey: ['todos'], queryFn: fetchTodos })`
-- Renders `<p>Loading...</p>` while loading
-- Renders `<p>Error loading todos. Is the backend running?</p>` on error
-- Renders `<p>No todos yet. Add one above!</p>` when the list is empty
-- Renders a `<ul>` of `<TodoItem>` components otherwise
+- Renders `<p>loading...</p>` while loading
+- Renders `<p>backend unreachable</p>` on error
+- Renders `<p>no tasks yet</p>` when the list is empty
+- Renders a toolbar above the list with a "select" / "cancel" toggle button
+- In selection mode each `TodoItem` receives `selected` and `onToggleSelect` props; completed todos receive `onToggleSelect: undefined` so their selection checkbox is hidden
+- When `selectedIds.size > 0`, a "complete selected (N)" button appears in the toolbar; it calls `bulkComplete(ids)` via `useMutation`, shows "completing…" and is disabled while pending
+- On bulk-complete success: invalidates `['todos']`, clears `selectedIds`, exits selection mode
 
 ---
 
@@ -46,11 +54,12 @@ Fetch wrappers for all backend endpoints. All functions use a `checkOk` helper t
 
 **File:** `src/components/TodoItem.jsx`
 
-**Props:** `{ todo: { id, title, completed, createdAt } }`
+**Props:** `{ todo: { id, title, completed, createdAt }, selected?: boolean, onToggleSelect?: (id: string) => void }`
 
-**Responsibility:** Render a single todo row with toggle and delete controls.
+**Responsibility:** Render a single todo row with toggle, delete, and optional selection controls.
 
 **Behaviour:**
-- Checkbox calls `toggleTodo(todo.id)` via `useMutation`, invalidates `['todos']` on success
+- Circular checkbox calls `toggleTodo(todo.id)` via `useMutation`, invalidates `['todos']` on success
 - Delete button calls `deleteTodo(todo.id)` via `useMutation`, invalidates `['todos']` on success
 - Title has `text-decoration: line-through` when `todo.completed` is true
+- When `onToggleSelect` is provided (selection mode and todo not completed), a square selection checkbox is rendered to the left of the circular checkbox; checking/unchecking calls `onToggleSelect(todo.id)`
