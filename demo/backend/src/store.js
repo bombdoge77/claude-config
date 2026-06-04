@@ -23,6 +23,12 @@ const remove = (id) => {
   return true;
 };
 
+const bulkComplete = (ids) => {
+  const matched = todos.filter(t => ids.includes(t.id));
+  matched.forEach(t => { t.completed = true; });
+  return matched.map(t => ({ ...t }));
+};
+
 const reset = () => { todos = []; nextId = 1; };
 
-module.exports = { getAll, create, toggle, remove, reset };
+module.exports = { getAll, create, toggle, remove, bulkComplete, reset };

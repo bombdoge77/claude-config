@@ -66,3 +66,64 @@ describe('DELETE /api/todos/:id', () => {
     expect(res.status).toBe(404);
   });
 });
+
+describe('POST /api/todos/bulk-complete', () => {
+  it('marks matched todos as completed and returns 200 with array', async () => {
+    const a = store.create('Alpha');
+    const b = store.create('Beta');
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: [a.id, b.id] });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(2);
+    expect(res.body[0]).toMatchObject({ id: a.id, completed: true });
+    expect(res.body[1]).toMatchObject({ id: b.id, completed: true });
+  });
+
+  it('silently skips unknown ids and returns matched ones', async () => {
+    const a = store.create('Alpha');
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: [a.id, '999'] });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(1);
+    expect(res.body[0].id).toBe(a.id);
+  });
+
+  it('is idempotent — already-completed todos are returned unchanged', async () => {
+    const a = store.create('Alpha');
+    store.bulkComplete([a.id]);
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: [a.id] });
+    expect(res.status).toBe(200);
+    expect(res.body[0].completed).toBe(true);
+  });
+
+  it('returns 400 when ids is missing', async () => {
+    const res = await request(app).post('/api/todos/bulk-complete').send({});
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('ids must be a non-empty array');
+  });
+
+  it('returns 400 when ids is not an array', async () => {
+    const res = await request(app).post('/api/todos/bulk-complete').send({ ids: '1' });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('ids must be a non-empty array');
+  });
+
+  it('returns 400 when ids is an empty array', async () => {
+    const res = await request(app).post('/api/todos/bulk-complete').send({ ids: [] });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('ids must be a non-empty array');
+  });
+
+  it('returns 404 when no ids match', async () => {
+    store.create('Alpha');
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: ['999', '888'] });
+    expect(res.status).toBe(404);
+    expect(res.body.error).toBe('no todos found for provided ids');
+  });
+});

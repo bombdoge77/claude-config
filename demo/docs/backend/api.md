@@ -71,6 +71,35 @@ Deletes a todo.
 
 ---
 
+## POST /api/todos/bulk-complete
+
+Marks multiple todos as completed in a single request. IDs that don't match any todo are silently skipped. Already-completed todos are returned unchanged (idempotent).
+
+**Request body**
+```json
+{ "ids": ["1", "3", "5"] }
+```
+
+**Response** `200 OK` — array of matched todos (all with `completed: true`)
+```json
+[
+  { "id": "1", "title": "Buy milk", "completed": true, "createdAt": "2026-03-27T10:00:00.000Z" },
+  { "id": "3", "title": "Walk dog", "completed": true, "createdAt": "2026-03-27T10:05:00.000Z" }
+]
+```
+
+**Error** `400 Bad Request` — `ids` is missing, not an array, or empty
+```json
+{ "error": "ids must be a non-empty array" }
+```
+
+**Error** `404 Not Found` — none of the provided IDs match any todo
+```json
+{ "error": "no todos found for provided ids" }
+```
+
+---
+
 ## Todo Shape
 
 | Field | Type | Description |
