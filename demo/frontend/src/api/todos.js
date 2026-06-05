@@ -19,6 +19,8 @@ export const toggleTodo = (id) =>
 export const deleteTodo = (id) =>
   fetch(`/api/todos/${id}`, { method: 'DELETE' }).then(checkOk);
 
+// Unlike the single-item endpoints, bulk-complete returns the updated todos as JSON,
+// so we parse the body here instead of returning the raw Response.
 export const bulkComplete = (ids) =>
   fetch('/api/todos/bulk-complete', {
     method: 'POST',

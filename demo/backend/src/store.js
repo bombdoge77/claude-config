@@ -24,9 +24,10 @@ const remove = (id) => {
 };
 
 const bulkComplete = (ids) => {
+  const idSet = new Set(ids);
   const updated = [];
   for (const todo of todos) {
-    if (ids.includes(todo.id)) {
+    if (idSet.has(todo.id)) {
       todo.completed = true;
       updated.push({ ...todo });
     }
