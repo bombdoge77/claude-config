@@ -120,6 +120,56 @@ html, body {
   cursor: not-allowed;
 }
 
+/* ── Todo toolbar (selection mode controls) ───────────── */
+
+.todo-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0 0.4rem;
+  min-height: 2.2rem;
+}
+
+.todo-select-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.todo-select-btn:hover {
+  color: var(--text);
+}
+
+.todo-bulk-btn {
+  background: transparent;
+  border: 1px solid var(--border-focus);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--accent);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.todo-bulk-btn:hover:not(:disabled) {
+  background: rgba(201, 162, 74, 0.08);
+}
+
+.todo-bulk-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 /* ── Todo list ────────────────────────────────────────── */
 
 .todo-list {
@@ -231,4 +281,42 @@ html, body {
 
 .todo-delete:hover {
   color: var(--danger-hover);
+}
+
+/* selection checkbox — small square, subdued */
+.todo-select-check {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s;
+  margin-right: -0.2rem;
+}
+
+.todo-select-check:hover {
+  border-color: var(--text-dim);
+}
+
+.todo-select-check:checked {
+  background: var(--border-focus);
+  border-color: var(--border-focus);
+}
+
+.todo-select-check:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  width: 3px;
+  height: 6px;
+  border: 1px solid var(--bg);
+  border-left: none;
+  border-top: none;
+  transform: rotate(45deg);
 }

@@ -18,3 +18,10 @@ export const toggleTodo = (id) =>
 
 export const deleteTodo = (id) =>
   fetch(`/api/todos/${id}`, { method: 'DELETE' }).then(checkOk);
+
+export const bulkComplete = (ids) =>
+  fetch('/api/todos/bulk-complete', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ids }),
+  }).then(checkOk).then(r => r.json());
