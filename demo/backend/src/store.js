@@ -23,6 +23,17 @@ const remove = (id) => {
   return true;
 };
 
+const bulkComplete = (ids) => {
+  const updated = [];
+  for (const todo of todos) {
+    if (ids.includes(todo.id)) {
+      todo.completed = true;
+      updated.push({ ...todo });
+    }
+  }
+  return updated;
+};
+
 const reset = () => { todos = []; nextId = 1; };
 
-module.exports = { getAll, create, toggle, remove, reset };
+module.exports = { getAll, create, toggle, remove, bulkComplete, reset };

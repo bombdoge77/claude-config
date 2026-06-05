@@ -42,6 +42,35 @@ Creates a new todo.
 
 ---
 
+## POST /api/todos/bulk-complete
+
+Marks multiple todos as completed in a single request. Already-completed todos are returned unchanged (idempotent). IDs that don't match any todo are silently skipped as long as at least one ID resolves.
+
+**Request body**
+```json
+{ "ids": ["1", "3", "5"] }
+```
+
+**Response** `200 OK` — returns the updated todos only
+```json
+[
+  { "id": "1", "title": "Buy milk", "completed": true, "createdAt": "2026-03-27T10:00:00.000Z" },
+  { "id": "3", "title": "Call dentist", "completed": true, "createdAt": "2026-03-28T09:00:00.000Z" }
+]
+```
+
+**Error** `400 Bad Request` — if `ids` is missing, not an array, or empty
+```json
+{ "error": "ids must be a non-empty array" }
+```
+
+**Error** `404 Not Found` — if none of the supplied IDs match any existing todo
+```json
+{ "error": "no todos found for provided ids" }
+```
+
+---
+
 ## PATCH /api/todos/:id
 
 Toggles the `completed` field of a todo.

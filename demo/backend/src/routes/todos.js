@@ -12,6 +12,18 @@ router.post('/', (req, res) => {
   res.status(201).json(store.create(title.trim()));
 });
 
+router.post('/bulk-complete', (req, res) => {
+  const { ids } = req.body;
+  if (!Array.isArray(ids) || ids.length === 0) {
+    return res.status(400).json({ error: 'ids must be a non-empty array' });
+  }
+  const updated = store.bulkComplete(ids);
+  if (updated.length === 0) {
+    return res.status(404).json({ error: 'no todos found for provided ids' });
+  }
+  res.json(updated);
+});
+
 router.patch('/:id', (req, res) => {
   const todo = store.toggle(req.params.id);
   if (!todo) return res.status(404).json({ error: 'not found' });

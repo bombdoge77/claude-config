@@ -53,6 +53,63 @@ describe('PATCH /api/todos/:id', () => {
   });
 });
 
+describe('POST /api/todos/bulk-complete', () => {
+  it('marks matching todos as completed and returns 200', async () => {
+    const a = store.create('Buy milk');
+    const b = store.create('Call dentist');
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: [a.id, b.id] });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(2);
+    expect(res.body[0]).toMatchObject({ id: a.id, completed: true });
+    expect(res.body[1]).toMatchObject({ id: b.id, completed: true });
+  });
+
+  it('returns only matched todos when some ids are unknown', async () => {
+    const a = store.create('Buy milk');
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: [a.id, '999'] });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(1);
+    expect(res.body[0].id).toBe(a.id);
+  });
+
+  it('returns 400 when ids is missing', async () => {
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({});
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('ids must be a non-empty array');
+  });
+
+  it('returns 400 when ids is an empty array', async () => {
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: [] });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('ids must be a non-empty array');
+  });
+
+  it('returns 400 when ids is not an array', async () => {
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: '1' });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('ids must be a non-empty array');
+  });
+
+  it('returns 404 when no ids match any todo', async () => {
+    store.create('Buy milk');
+    const res = await request(app)
+      .post('/api/todos/bulk-complete')
+      .send({ ids: ['999', '888'] });
+    expect(res.status).toBe(404);
+    expect(res.body.error).toBe('no todos found for provided ids');
+  });
+});
+
 describe('DELETE /api/todos/:id', () => {
   it('deletes a todo and returns 204', async () => {
     const created = store.create('Test');
