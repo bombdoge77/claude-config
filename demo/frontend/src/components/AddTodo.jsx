@@ -25,6 +25,7 @@ export default function AddTodo() {
         className="add-input"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        maxLength={200}
         placeholder="new task..."
       />
       <button type="submit" className="add-button" disabled={isPending} aria-label="Add task">

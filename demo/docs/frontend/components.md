@@ -20,7 +20,7 @@ Fetch wrappers for all backend endpoints. All functions use a `checkOk` helper t
 **Responsibility:** Render a form to create a new todo.
 
 **Behaviour:**
-- Controlled `<input>` bound to local `title` state
+- Controlled `<input>` bound to local `title` state, with `maxLength={200}` to match the backend title limit
 - On submit: calls `createTodo(title.trim())` via `useMutation`
 - On success: invalidates `['todos']` query, clears the input
 - Button shows "Adding..." and is disabled while the mutation is pending

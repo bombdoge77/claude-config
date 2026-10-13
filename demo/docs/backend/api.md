@@ -40,6 +40,11 @@ Creates a new todo.
 { "error": "title is required" }
 ```
 
+**Error** `400 Bad Request` — if the trimmed `title` is longer than 200 characters
+```json
+{ "error": "title must be 200 characters or fewer" }
+```
+
 ---
 
 ## PATCH /api/todos/:id
@@ -76,6 +81,6 @@ Deletes a todo.
 | Field | Type | Description |
 |-------|------|-------------|
 | `id` | string | Auto-incremented numeric ID as string |
-| `title` | string | Todo text, trimmed on creation |
+| `title` | string | Todo text, trimmed on creation; max 200 characters (after trimming) |
 | `completed` | boolean | Whether the todo is done |
 | `createdAt` | string | ISO 8601 timestamp |

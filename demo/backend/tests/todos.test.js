@@ -37,6 +37,26 @@ describe('POST /api/todos', () => {
     expect(res.status).toBe(400);
     expect(res.body.error).toBe('title is required');
   });
+
+  it('accepts a title of exactly 200 characters', async () => {
+    const title = 'a'.repeat(200);
+    const res = await request(app).post('/api/todos').send({ title });
+    expect(res.status).toBe(201);
+    expect(res.body.title).toBe(title);
+  });
+
+  it('returns 400 when title exceeds 200 characters', async () => {
+    const res = await request(app).post('/api/todos').send({ title: 'a'.repeat(201) });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('title must be 200 characters or fewer');
+  });
+
+  it('measures length after trimming surrounding whitespace', async () => {
+    const title = 'a'.repeat(200);
+    const res = await request(app).post('/api/todos').send({ title: `  ${title}  ` });
+    expect(res.status).toBe(201);
+    expect(res.body.title).toBe(title);
+  });
 });
 
 describe('PATCH /api/todos/:id', () => {
