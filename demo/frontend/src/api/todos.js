@@ -18,3 +18,10 @@ export const toggleTodo = (id) =>
 
 export const deleteTodo = (id) =>
   fetch(`/api/todos/${id}`, { method: 'DELETE' }).then(checkOk);
+
+export const updateNotes = (id, notes) =>
+  fetch(`/api/todos/${id}/notes`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ notes }),
+  }).then(checkOk).then(r => r.json());

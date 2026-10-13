@@ -8,7 +8,7 @@ test('getAll returns empty array initially', () => {
 
 test('create adds a todo with expected shape', () => {
   const todo = store.create('Buy milk');
-  expect(todo).toMatchObject({ title: 'Buy milk', completed: false });
+  expect(todo).toMatchObject({ title: 'Buy milk', completed: false, notes: '' });
   expect(typeof todo.id).toBe('string');
   expect(typeof todo.createdAt).toBe('string');
   expect(store.getAll()).toHaveLength(1);
@@ -22,6 +22,16 @@ test('toggle flips completed and returns the todo', () => {
 
 test('toggle returns null for unknown id', () => {
   expect(store.toggle('999')).toBeNull();
+});
+
+test('setNotes replaces notes and returns the todo', () => {
+  const todo = store.create('Test');
+  expect(store.setNotes(todo.id, 'some notes').notes).toBe('some notes');
+  expect(store.getAll()[0].notes).toBe('some notes');
+});
+
+test('setNotes returns null for unknown id', () => {
+  expect(store.setNotes('999', 'x')).toBeNull();
 });
 
 test('remove deletes the todo and returns true', () => {

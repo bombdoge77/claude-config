@@ -2,6 +2,8 @@ const express = require('express');
 const store = require('../store');
 const router = express.Router();
 
+const MAX_NOTES_LENGTH = 2000;
+
 router.get('/', (req, res) => res.json(store.getAll()));
 
 router.post('/', (req, res) => {
@@ -14,6 +16,19 @@ router.post('/', (req, res) => {
 
 router.patch('/:id', (req, res) => {
   const todo = store.toggle(req.params.id);
+  if (!todo) return res.status(404).json({ error: 'not found' });
+  res.json(todo);
+});
+
+router.patch('/:id/notes', (req, res) => {
+  const { notes } = req.body;
+  if (typeof notes !== 'string') {
+    return res.status(400).json({ error: 'notes must be a string' });
+  }
+  if (notes.length > MAX_NOTES_LENGTH) {
+    return res.status(400).json({ error: `notes must be at most ${MAX_NOTES_LENGTH} characters` });
+  }
+  const todo = store.setNotes(req.params.id, notes);
   if (!todo) return res.status(404).json({ error: 'not found' });
   res.json(todo);
 });

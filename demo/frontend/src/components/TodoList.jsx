@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchTodos } from '../api/todos';
 import TodoItem from './TodoItem';
 
-export default function TodoList() {
+export default function TodoList({ selectedId, onSelect }) {
   const { data: todos, isLoading, isError } = useQuery({
     queryKey: ['todos'],
     queryFn: fetchTodos,
@@ -15,7 +15,12 @@ export default function TodoList() {
   return (
     <ul className="todo-list">
       {todos.map(todo => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          selected={todo.id === selectedId}
+          onSelect={onSelect}
+        />
       ))}
     </ul>
   );

@@ -28,7 +28,7 @@ backend/
 
 **In-memory store.** Todos are kept in a module-scoped array in `store.js`. State is lost on server restart. The `reset()` export is used by tests via `beforeEach` for isolation.
 
-**Store returns copies.** `getAll()` returns `[...todos]` and `toggle()` returns `{ ...todo }` to prevent callers from accidentally mutating internal state.
+**Store returns copies.** `getAll()` returns `[...todos]`, and `toggle()` and `setNotes()` return `{ ...todo }` to prevent callers from accidentally mutating internal state.
 
 ## Request Flow
 
@@ -37,6 +37,6 @@ HTTP Request
   → Express (app.js)
     → express.json() middleware
       → /api/todos router (routes/todos.js)
-        → store.js (getAll / create / toggle / remove)
+        → store.js (getAll / create / toggle / setNotes / remove)
           → JSON response
 ```
