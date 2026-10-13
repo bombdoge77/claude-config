@@ -4,7 +4,7 @@ let nextId = 1;
 const getAll = () => [...todos];
 
 const create = (title) => {
-  const todo = { id: String(nextId++), title, completed: false, createdAt: new Date().toISOString() };
+  const todo = { id: String(nextId++), title, completed: false, notes: '', createdAt: new Date().toISOString() };
   todos.push(todo);
   return todo;
 };
@@ -13,6 +13,13 @@ const toggle = (id) => {
   const todo = todos.find(t => t.id === id);
   if (!todo) return null;
   todo.completed = !todo.completed;
+  return { ...todo };
+};
+
+const setNotes = (id, notes) => {
+  const todo = todos.find(t => t.id === id);
+  if (!todo) return null;
+  todo.notes = notes;
   return { ...todo };
 };
 
@@ -25,4 +32,4 @@ const remove = (id) => {
 
 const reset = () => { todos = []; nextId = 1; };
 
-module.exports = { getAll, create, toggle, remove, reset };
+module.exports = { getAll, create, toggle, setNotes, remove, reset };
