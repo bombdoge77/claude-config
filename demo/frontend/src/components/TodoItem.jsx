@@ -8,7 +8,7 @@ const CARD_COLORS = [
   { bg: '#160f1d', border: '#23182d' }, // mauve
 ];
 
-export default function TodoItem({ todo }) {
+export default function TodoItem({ todo, selected, onSelect }) {
   const queryClient = useQueryClient();
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['todos'] });
 
@@ -19,13 +19,19 @@ export default function TodoItem({ todo }) {
 
   const { mutate: remove } = useMutation({
     mutationFn: () => deleteTodo(todo.id),
-    onSuccess: invalidate,
+    onSuccess: () => {
+      if (selected) onSelect(null);
+      invalidate();
+    },
   });
 
   const { bg, border } = CARD_COLORS[parseInt(todo.id) % CARD_COLORS.length];
 
   return (
-    <li className="todo-item" style={{ background: bg, borderColor: border }}>
+    <li
+      className={`todo-item${selected ? ' todo-item--selected' : ''}`}
+      style={{ background: bg, borderColor: selected ? 'var(--accent)' : border }}
+    >
       <input
         className="todo-checkbox"
         type="checkbox"
@@ -33,9 +39,15 @@ export default function TodoItem({ todo }) {
         onChange={() => toggle()}
         aria-label={`Mark "${todo.title}" as ${todo.completed ? 'incomplete' : 'complete'}`}
       />
-      <span className={`todo-title${todo.completed ? ' todo-title--done' : ''}`}>
+      <button
+        type="button"
+        className={`todo-title${todo.completed ? ' todo-title--done' : ''}`}
+        onClick={() => onSelect(todo.id)}
+        aria-pressed={selected}
+      >
         {todo.title}
-      </span>
+      </button>
+      {todo.notes && <span className="todo-notes-dot" role="img" aria-label="Has notes" />}
       <button
         className="todo-delete"
         onClick={() => remove()}
