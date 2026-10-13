@@ -2,6 +2,8 @@ const express = require('express');
 const store = require('../store');
 const router = express.Router();
 
+const MAX_TITLE_LENGTH = 200;
+
 router.get('/', (req, res) => res.json(store.getAll()));
 
 router.post('/', (req, res) => {
@@ -9,7 +11,11 @@ router.post('/', (req, res) => {
   if (!title || !title.trim()) {
     return res.status(400).json({ error: 'title is required' });
   }
-  res.status(201).json(store.create(title.trim()));
+  const trimmed = title.trim();
+  if (trimmed.length > MAX_TITLE_LENGTH) {
+    return res.status(400).json({ error: `title must be ${MAX_TITLE_LENGTH} characters or fewer` });
+  }
+  res.status(201).json(store.create(trimmed));
 });
 
 router.patch('/:id', (req, res) => {
